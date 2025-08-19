@@ -41,3 +41,12 @@ Gallery images:
     ├── reception-hero.webp
     ├── reception-1.webp
     └── reception-party.webp
+
+    Place these MP3 files in /public/audio/:
+
+    home-music.mp3 - Main wedding theme
+    haldi-music.mp3 - Traditional ceremony music
+    mehndi-music.mp3 - Folk celebration music
+    sangeet-music.mp3 - Upbeat dance music
+    wedding-music.mp3 - Sacred ceremonial music
+    reception-music.mp3 - Party celebration music
