@@ -27,12 +27,6 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% { left: -100%; }
-  100% { left: 100%; }
 }
 
 .container {
@@ -69,16 +63,10 @@
 
 .flowerLeft, .flowerRight {
   font-size: 1.5rem;
-  animation: rotate 4s linear infinite;
 }
 
 .flowerRight {
-  animation-direction: reverse;
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  transform: scaleX(-1);
 }
 
 .title {
@@ -98,11 +86,9 @@
     0 0 10px rgba(255, 255, 255, 0.5);
   letter-spacing: 2px;
   background: linear-gradient(45deg, #d63384, #b02a5b, #d63384);
-  background-size: 200% 200%;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradientShift 3s ease-in-out infinite;
 }
 
 .titleSubtext {
@@ -116,10 +102,7 @@
   margin-top: -0.2rem;
 }
 
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
+
 
 .heartDecoration {
   display: flex;
@@ -129,13 +112,7 @@
 
 .heartIcon {
   font-size: 1.2rem;
-  animation: heartbeat 2s infinite;
   filter: drop-shadow(0 0 8px rgba(255, 182, 193, 0.8));
-}
-
-@keyframes heartbeat {
-  0%, 50%, 100% { transform: scale(1); }
-  25%, 75% { transform: scale(1.3); }
 }
 
 .mobileMenuToggle {
@@ -285,32 +262,21 @@
   position: absolute;
   font-size: 1.2rem;
   opacity: 0.3;
-  animation: float 6s ease-in-out infinite;
 }
 
 .floatingFlower1 {
   top: 20%;
   left: 10%;
-  animation-delay: 0s;
 }
 
 .floatingFlower2 {
   top: 60%;
   right: 15%;
-  animation-delay: 2s;
 }
 
 .floatingFlower3 {
   bottom: 30%;
   left: 80%;
-  animation-delay: 4s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  25% { transform: translateY(-10px) rotate(5deg); }
-  50% { transform: translateY(-5px) rotate(-5deg); }
-  75% { transform: translateY(-15px) rotate(3deg); }
 }
 
 /* Mobile Responsive Design */
