@@ -1,0 +1,304 @@
+
+.footer {
+  background: linear-gradient(135deg, #2c1810, #4a2c2a, #5d4037);
+  color: white;
+  padding: 4rem 0 2rem;
+  margin-top: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(255, 154, 158, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(254, 207, 239, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(255, 209, 220, 0.1) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Couple Section */
+.coupleSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.groomSection,
+.brideSection {
+  flex: 1;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.groomSection:hover,
+.brideSection:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255, 154, 158, 0.3);
+}
+
+.coupleTitle {
+  font-size: 1.2rem;
+  color: #fecfef;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.coupleName {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(45deg, #ff9a9e, #fecfef, #ffd1dc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
+}
+
+.parentsLabel {
+  font-size: 1rem;
+  color: #f8d7da;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.parentsNames {
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.heartDivider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 2rem;
+}
+
+.heartIcon {
+  font-size: 2rem;
+  animation: heartbeat 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.8));
+}
+
+@keyframes heartbeat {
+  0%, 50%, 100% {
+    transform: scale(1);
+  }
+  25%, 75% {
+    transform: scale(1.2);
+  }
+}
+
+/* Events Section */
+.eventsSection {
+  margin-bottom: 4rem;
+}
+
+.eventsTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: #fecfef;
+  font-family: 'Georgia', serif;
+}
+
+.eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.eventItem {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.eventItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 154, 158, 0.3);
+}
+
+.eventEmoji {
+  font-size: 2.5rem;
+  margin-right: 1rem;
+  filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.5));
+}
+
+.eventDetails h4 {
+  font-size: 1.3rem;
+  color: #ffd1dc;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.eventDetails p {
+  color: white;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Venue Section */
+.venueSection {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.venueTitle {
+  font-size: 2rem;
+  color: #fecfef;
+  margin-bottom: 2rem;
+  font-family: 'Georgia', serif;
+  font-weight: 700;
+}
+
+.venueName {
+  font-size: 1.8rem;
+  color: #ffd1dc;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.venueAddress,
+.venueContact {
+  font-size: 1.1rem;
+  color: white;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Bottom Section */
+.bottomSection {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.thanksMessage {
+  margin-bottom: 1rem;
+}
+
+.thanksMessage p {
+  font-size: 1.3rem;
+  color: #ffd1dc;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.socialIcons span {
+  font-size: 1.5rem;
+  animation: float 3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+
+.socialIcons span:nth-child(1) { --i: 0; }
+.socialIcons span:nth-child(2) { --i: 1; }
+.socialIcons span:nth-child(3) { --i: 2; }
+.socialIcons span:nth-child(4) { --i: 3; }
+.socialIcons span:nth-child(5) { --i: 4; }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coupleSection {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .heartDivider {
+    flex-direction: row;
+    margin: 1rem 0;
+  }
+  
+  .coupleName {
+    font-size: 2rem;
+  }
+  
+  .eventsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .eventItem {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .eventEmoji {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .coupleName {
+    font-size: 1.8rem;
+  }
+  
+  .eventsTitle {
+    font-size: 2rem;
+  }
+  
+  .venueTitle {
+    font-size: 1.6rem;
+  }
+}

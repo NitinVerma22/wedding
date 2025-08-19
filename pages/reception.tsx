@@ -1,17 +1,22 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import styles from '../styles/EventPage.module.css';
 
 const Reception = () => {
-  const images = [
-    '/images/reception1.jpg',
-    '/images/reception2.jpg',
-    '/images/reception3.jpg',
-    '/images/reception4.jpg',
-    '/images/reception5.jpg',
-    '/images/reception6.jpg'
-  ];
+  const [images, setImages] = useState<string[]>([]);
+  const [heroImage, setHeroImage] = useState('/images/reception-hero.jpg');
+
+  useEffect(() => {
+    fetch('/api/gallery/reception')
+      .then(res => res.json())
+      .then(data => {
+        setImages(data.images);
+        setHeroImage(data.heroImage);
+      })
+      .catch(error => console.error('Error fetching images:', error));
+  }, []);
 
   return (
     <div>
@@ -19,7 +24,7 @@ const Reception = () => {
       
       <section className={styles.hero}>
         <div className={styles.heroImage}>
-          <img src="/images/reception-hero.jpg" alt="Reception Party" />
+          <img src={heroImage} alt="Reception Party" />
         </div>
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -32,17 +37,24 @@ const Reception = () => {
         <div className={styles.container}>
           <h2 className={styles.galleryTitle}>Celebration Highlights</h2>
           <div className={styles.imageGrid}>
-            {images.map((image, index) => (
-              <div key={index} className={styles.imageCard}>
-                <img src={image} alt={`Reception moment ${index + 1}`} />
-                <div className={styles.imageOverlay}>
-                  <span className={styles.imageIcon}>🎉</span>
+            {images.length > 0 ? (
+              images.map((image, index) => (
+                <div key={index} className={styles.imageCard}>
+                  <img src={image} alt={`Reception moment ${index + 1}`} />
+                  <div className={styles.imageOverlay}>
+                    <span className={styles.imageIcon}>🎉</span>
+                  </div>
                 </div>
+              ))
+            ) : (
+              <div className={styles.noImages}>
+                <p>No images available yet. Please add images to the gallery.</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

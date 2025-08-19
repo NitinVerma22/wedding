@@ -1,17 +1,22 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import styles from '../styles/EventPage.module.css';
 
 const Sangeet = () => {
-  const images = [
-    '/images/sangeet1.jpg',
-    '/images/sangeet2.jpg',
-    '/images/sangeet3.jpg',
-    '/images/sangeet4.jpg',
-    '/images/sangeet5.jpg',
-    '/images/sangeet6.jpg'
-  ];
+  const [images, setImages] = useState<string[]>([]);
+  const [heroImage, setHeroImage] = useState('/images/sangeet-hero.jpg');
+
+  useEffect(() => {
+    fetch('/api/gallery/sangeet')
+      .then(res => res.json())
+      .then(data => {
+        setImages(data.images);
+        setHeroImage(data.heroImage);
+      })
+      .catch(error => console.error('Error fetching images:', error));
+  }, []);
 
   return (
     <div>
@@ -19,7 +24,7 @@ const Sangeet = () => {
       
       <section className={styles.hero}>
         <div className={styles.heroImage}>
-          <img src="/images/sangeet-hero.jpg" alt="Sangeet Night" />
+          <img src={heroImage} alt="Sangeet Night" />
         </div>
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -32,17 +37,24 @@ const Sangeet = () => {
         <div className={styles.container}>
           <h2 className={styles.galleryTitle}>Dance & Music</h2>
           <div className={styles.imageGrid}>
-            {images.map((image, index) => (
-              <div key={index} className={styles.imageCard}>
-                <img src={image} alt={`Sangeet moment ${index + 1}`} />
-                <div className={styles.imageOverlay}>
-                  <span className={styles.imageIcon}>🎵</span>
+            {images.length > 0 ? (
+              images.map((image, index) => (
+                <div key={index} className={styles.imageCard}>
+                  <img src={image} alt={`Sangeet moment ${index + 1}`} />
+                  <div className={styles.imageOverlay}>
+                    <span className={styles.imageIcon}>🎵</span>
+                  </div>
                 </div>
+              ))
+            ) : (
+              <div className={styles.noImages}>
+                <p>No images available yet. Please add images to the gallery.</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

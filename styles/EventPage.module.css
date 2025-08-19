@@ -160,6 +160,21 @@
   }
 }
 
+.noImages {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 154, 158, 0.1);
+  border-radius: 15px;
+  border: 2px dashed rgba(255, 154, 158, 0.3);
+}
+
+.noImages p {
+  font-size: 1.2rem;
+  color: #d63384;
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .heroTitle {
     font-size: 2.5rem;

@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Header from "../components/Header";
 import EventCard from "../components/EventCard";
+import Footer from "../components/Footer";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -81,6 +82,7 @@ const Home: NextPage = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

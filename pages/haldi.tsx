@@ -1,17 +1,22 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import styles from '../styles/EventPage.module.css';
 
 const Haldi = () => {
-  const images = [
-    '/images/haldi1.jpg',
-    '/images/haldi2.jpg',
-    '/images/haldi3.jpg',
-    '/images/haldi4.jpg',
-    '/images/haldi5.jpg',
-    '/images/haldi6.jpg'
-  ];
+  const [images, setImages] = useState<string[]>([]);
+  const [heroImage, setHeroImage] = useState('/images/haldi-hero.jpg');
+
+  useEffect(() => {
+    fetch('/api/gallery/haldi')
+      .then(res => res.json())
+      .then(data => {
+        setImages(data.images);
+        setHeroImage(data.heroImage);
+      })
+      .catch(error => console.error('Error fetching images:', error));
+  }, []);
 
   return (
     <div>
@@ -19,7 +24,7 @@ const Haldi = () => {
       
       <section className={styles.hero}>
         <div className={styles.heroImage}>
-          <img src="/images/haldi-hero.jpg" alt="Haldi Ceremony" />
+          <img src={heroImage} alt="Haldi Ceremony" />
         </div>
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -32,17 +37,24 @@ const Haldi = () => {
         <div className={styles.container}>
           <h2 className={styles.galleryTitle}>Memories from our Haldi</h2>
           <div className={styles.imageGrid}>
-            {images.map((image, index) => (
-              <div key={index} className={styles.imageCard}>
-                <img src={image} alt={`Haldi moment ${index + 1}`} />
-                <div className={styles.imageOverlay}>
-                  <span className={styles.imageIcon}>💛</span>
+            {images.length > 0 ? (
+              images.map((image, index) => (
+                <div key={index} className={styles.imageCard}>
+                  <img src={image} alt={`Haldi moment ${index + 1}`} />
+                  <div className={styles.imageOverlay}>
+                    <span className={styles.imageIcon}>💛</span>
+                  </div>
                 </div>
+              ))
+            ) : (
+              <div className={styles.noImages}>
+                <p>No images available yet. Please add images to the gallery.</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

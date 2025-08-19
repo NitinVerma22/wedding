@@ -1,17 +1,22 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import styles from '../styles/EventPage.module.css';
 
 const Wedding = () => {
-  const images = [
-    '/images/wedding1.jpg',
-    '/images/wedding2.jpg',
-    '/images/wedding3.jpg',
-    '/images/wedding4.jpg',
-    '/images/wedding5.jpg',
-    '/images/wedding6.jpg'
-  ];
+  const [images, setImages] = useState<string[]>([]);
+  const [heroImage, setHeroImage] = useState('/images/wedding-hero.jpg');
+
+  useEffect(() => {
+    fetch('/api/gallery/wedding')
+      .then(res => res.json())
+      .then(data => {
+        setImages(data.images);
+        setHeroImage(data.heroImage);
+      })
+      .catch(error => console.error('Error fetching images:', error));
+  }, []);
 
   return (
     <div>
@@ -19,7 +24,7 @@ const Wedding = () => {
       
       <section className={styles.hero}>
         <div className={styles.heroImage}>
-          <img src="/images/wedding-hero.jpg" alt="Wedding Ceremony" />
+          <img src={heroImage} alt="Wedding Ceremony" />
         </div>
         <div className={styles.heroOverlay}></div>
         <div className={styles.heroContent}>
@@ -32,17 +37,24 @@ const Wedding = () => {
         <div className={styles.container}>
           <h2 className={styles.galleryTitle}>Sacred Moments</h2>
           <div className={styles.imageGrid}>
-            {images.map((image, index) => (
-              <div key={index} className={styles.imageCard}>
-                <img src={image} alt={`Wedding moment ${index + 1}`} />
-                <div className={styles.imageOverlay}>
-                  <span className={styles.imageIcon}>💕</span>
+            {images.length > 0 ? (
+              images.map((image, index) => (
+                <div key={index} className={styles.imageCard}>
+                  <img src={image} alt={`Wedding moment ${index + 1}`} />
+                  <div className={styles.imageOverlay}>
+                    <span className={styles.imageIcon}>💕</span>
+                  </div>
                 </div>
+              ))
+            ) : (
+              <div className={styles.noImages}>
+                <p>No images available yet. Please add images to the gallery.</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
