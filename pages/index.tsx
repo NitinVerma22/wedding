@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Header from "../components/Header";
+import EventCard from "../components/EventCard";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -44,7 +45,41 @@ const Home: NextPage = () => {
         </div>
       </section>
       <main className={styles.main}>
-        <h1>Welcome to our Wedding Celebration</h1>
+        <section className={styles.eventsSection}>
+          <h2 className={styles.sectionTitle}>Our Wedding Journey</h2>
+          <div className={styles.eventsGrid}>
+            <EventCard
+              title="Haldi"
+              image="/images/haldi.jpg"
+              description="A traditional ceremony with turmeric paste, bringing good luck and prosperity"
+              link="/haldi"
+            />
+            <EventCard
+              title="Mehndi"
+              image="/images/mehndi.jpg"
+              description="Beautiful henna designs and celebration with music and dance"
+              link="/mehndi"
+            />
+            <EventCard
+              title="Sangeet"
+              image="/images/sangeet.jpg"
+              description="Musical night filled with performances, laughter, and joy"
+              link="/sangeet"
+            />
+            <EventCard
+              title="Wedding"
+              image="/images/wedding.jpg"
+              description="The sacred ceremony where two hearts become one forever"
+              link="/wedding"
+            />
+            <EventCard
+              title="Reception"
+              image="/images/reception.jpg"
+              description="Celebration dinner with family and friends to honor the newlyweds"
+              link="/reception"
+            />
+          </div>
+        </section>
       </main>
     </div>
   );

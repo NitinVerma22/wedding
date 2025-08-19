@@ -1,0 +1,24 @@
+
+This directory contains images for the wedding website.
+Please add the following images:
+
+Hero images:
+- haldi-hero.jpg
+- mehndi-hero.jpg
+- sangeet-hero.jpg
+- wedding-hero.jpg
+- reception-hero.jpg
+
+Event card images:
+- haldi.jpg
+- mehndi.jpg
+- sangeet.jpg
+- wedding.jpg
+- reception.jpg
+
+Gallery images:
+- haldi1.jpg to haldi6.jpg
+- mehndi1.jpg to mehndi6.jpg
+- sangeet1.jpg to sangeet6.jpg
+- wedding1.jpg to wedding6.jpg
+- reception1.jpg to reception6.jpg
