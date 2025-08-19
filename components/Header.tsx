@@ -3,9 +3,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './Header.module.css';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  name: string;
+  nav: string[];
+}
+
+const Header: React.FC<HeaderProps> = ({ name, nav }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navItems = ['Haldi', 'Mehndi', 'Sangeet', 'Wedding', 'Reception'];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,7 +24,7 @@ const Header: React.FC = () => {
               <div className={styles.logoDecoration}>
                 <span className={styles.flowerLeft}>🌸</span>
                 <h1 className={styles.title}>
-                  <span className={styles.titleMain}>Male & Female</span>
+                  <span className={styles.titleMain}>{name}</span>
                   <span className={styles.titleSubtext}>Forever Together</span>
                 </h1>
                 <span className={styles.flowerRight}>🌺</span>
@@ -50,7 +54,7 @@ const Header: React.FC = () => {
                 <span className={styles.navText}>Home</span>
               </Link>
             </li>
-            {navItems.map((item, index) => (
+            {nav.map((item, index) => (
               <li key={index} className={styles.navItem}>
                 <Link href={`/${item.toLowerCase()}`} className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
                   <span className={styles.navIcon}>
