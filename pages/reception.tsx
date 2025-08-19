@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import AudioPlayer from '../components/AudioPlayer';
 import styles from '../styles/EventPage.module.css';
 
 const Reception = () => {
@@ -55,6 +56,7 @@ const Reception = () => {
         </div>
       </section>
       <Footer />
+      <AudioPlayer audioSrc="/audio/reception-music.mp3" pageName="Reception" />
     </div>
   );
 };

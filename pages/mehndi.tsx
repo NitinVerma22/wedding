@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import AudioPlayer from '../components/AudioPlayer';
 import styles from '../styles/EventPage.module.css';
 
 const Mehndi = () => {
@@ -55,6 +56,7 @@ const Mehndi = () => {
         </div>
       </section>
       <Footer />
+      <AudioPlayer audioSrc="/audio/mehndi-music.mp3" pageName="Mehndi" />
     </div>
   );
 };

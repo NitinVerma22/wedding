@@ -1,0 +1,22 @@
+
+Please add the following audio files to this directory:
+
+Background Music Files:
+- home-music.mp3 (Main wedding theme music)
+- haldi-music.mp3 (Traditional/devotional music for Haldi ceremony)
+- mehndi-music.mp3 (Folk/celebratory music for Mehndi)
+- sangeet-music.mp3 (Upbeat/dance music for Sangeet night)
+- wedding-music.mp3 (Sacred/ceremonial music for Wedding)
+- reception-music.mp3 (Party/celebration music for Reception)
+
+Audio Format Support:
+- Primary: MP3 format
+- Fallback: OGG format (optional)
+
+Audio Guidelines:
+- Keep file sizes reasonable (2-5MB for web)
+- Use instrumental or low-volume background music
+- Ensure audio loops seamlessly
+- Consider cultural appropriateness for each ceremony
+
+Note: The audio player automatically loops the music and provides play/pause controls.

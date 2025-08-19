@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import AudioPlayer from '../components/AudioPlayer';
 import styles from '../styles/EventPage.module.css';
 
 const Haldi = () => {
@@ -55,6 +56,7 @@ const Haldi = () => {
         </div>
       </section>
       <Footer />
+      <AudioPlayer audioSrc="/audio/haldi-music.mp3" pageName="Haldi" />
     </div>
   );
 };

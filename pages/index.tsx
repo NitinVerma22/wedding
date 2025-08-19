@@ -4,6 +4,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import EventCard from "../components/EventCard";
 import Footer from "../components/Footer";
+import AudioPlayer from "../components/AudioPlayer";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -83,6 +84,7 @@ const Home: NextPage = () => {
         </section>
       </main>
       <Footer />
+      <AudioPlayer audioSrc="/audio/home-music.mp3" pageName="Wedding" />
     </div>
   );
 };
