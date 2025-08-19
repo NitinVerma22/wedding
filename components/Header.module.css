@@ -152,6 +152,7 @@
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(214, 51, 132, 0.2);
+  position: relative;
 }
 
 .mobileMenuToggle:hover {
@@ -196,9 +197,9 @@
   font-weight: 600;
   font-size: 1rem;
   padding: 1rem 1.5rem;
-  border-radius: 50px;
+  border-radius: 25px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   border: 2px solid rgba(214, 51, 132, 0.2);
   position: relative;
   overflow: hidden;
@@ -207,8 +208,11 @@
   gap: 0.5rem;
   backdrop-filter: blur(10px);
   box-shadow: 
-    0 4px 15px rgba(214, 51, 132, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    0 8px 25px rgba(214, 51, 132, 0.2),
+    0 4px 15px rgba(255, 182, 193, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(214, 51, 132, 0.1);
+  clip-path: ellipse(100% 100% at 50% 50%);
 }
 
 .navLink::before {
@@ -229,33 +233,44 @@
 .navLink:hover {
   background: rgba(255, 255, 255, 0.95);
   border-color: #d63384;
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-5px) scale(1.08);
   box-shadow: 
-    0 12px 30px rgba(214, 51, 132, 0.3),
-    0 4px 15px rgba(255, 182, 193, 0.4);
+    0 15px 40px rgba(214, 51, 132, 0.35),
+    0 8px 25px rgba(255, 182, 193, 0.4),
+    0 20px 60px rgba(214, 51, 132, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
   color: #b02a5b;
 }
 
 .navIcon {
   font-size: 1.1rem;
-  filter: drop-shadow(0 1px 2px rgba(214, 51, 132, 0.3));
+  filter: drop-shadow(0 2px 4px rgba(214, 51, 132, 0.3));
 }
 
 .navText {
   font-family: 'Georgia', serif;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  text-shadow: 0 1px 2px rgba(214, 51, 132, 0.1);
 }
 
 .homeLink {
-  background: linear-gradient(135deg, rgba(218, 165, 32, 0.8), rgba(255, 215, 0, 0.8));
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.9), rgba(255, 215, 0, 0.9));
   border-color: rgba(218, 165, 32, 0.5);
   color: #8B4513;
+  box-shadow: 
+    0 8px 25px rgba(218, 165, 32, 0.3),
+    0 4px 15px rgba(255, 215, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .homeLink:hover {
   background: linear-gradient(135deg, rgba(218, 165, 32, 0.95), rgba(255, 215, 0, 0.95));
   border-color: #DAA520;
   color: #654321;
+  box-shadow: 
+    0 15px 40px rgba(218, 165, 32, 0.4),
+    0 8px 25px rgba(255, 215, 0, 0.3),
+    0 20px 60px rgba(218, 165, 32, 0.25);
 }
 
 .headerDecorations {
@@ -323,6 +338,7 @@
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
+    position: relative;
   }
   
   .titleMain {
@@ -340,47 +356,65 @@
   
   .mobileMenuToggle {
     display: flex;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1002;
   }
   
   .nav {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     background: linear-gradient(
       135deg, 
       rgba(255, 154, 158, 0.98) 0%, 
       rgba(254, 207, 239, 0.98) 50%, 
       rgba(255, 209, 220, 0.98) 100%
     );
-    backdrop-filter: blur(20px);
-    box-shadow: 
-      0 8px 32px rgba(255, 154, 158, 0.4),
-      0 4px 16px rgba(255, 182, 193, 0.3);
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 999;
-    border-radius: 0 0 20px 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(25px);
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .navOpen {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
+    transform: translateX(0);
   }
   
   .navList {
     flex-direction: column;
-    padding: 2rem 1rem;
-    gap: 1rem;
-    width: 100%;
+    padding: 2rem;
+    gap: 1.5rem;
+    width: 90%;
+    max-width: 400px;
+    align-items: stretch;
   }
   
   .navItem {
     width: 100%;
+    opacity: 0;
+    transform: translateX(50px);
+    animation: slideInMobile 0.6s ease forwards;
+  }
+  
+  .navOpen .navItem:nth-child(1) { animation-delay: 0.1s; }
+  .navOpen .navItem:nth-child(2) { animation-delay: 0.2s; }
+  .navOpen .navItem:nth-child(3) { animation-delay: 0.3s; }
+  .navOpen .navItem:nth-child(4) { animation-delay: 0.4s; }
+  .navOpen .navItem:nth-child(5) { animation-delay: 0.5s; }
+  .navOpen .navItem:nth-child(6) { animation-delay: 0.6s; }
+  
+  @keyframes slideInMobile {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   
   .navLink {
@@ -388,18 +422,39 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 1.2rem 1.5rem;
+    padding: 1.8rem 2rem;
     margin: 0;
-    border-radius: 20px;
-    font-size: 1.1rem;
-    background: rgba(255, 255, 255, 0.9);
+    border-radius: 30px;
+    font-size: 1.3rem;
+    background: rgba(255, 255, 255, 0.95);
     box-shadow: 
-      0 4px 15px rgba(214, 51, 132, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      0 12px 35px rgba(214, 51, 132, 0.25),
+      0 6px 20px rgba(255, 182, 193, 0.3),
+      0 25px 50px rgba(214, 51, 132, 0.15),
+      inset 0 2px 0 rgba(255, 255, 255, 0.8),
+      inset 0 -2px 0 rgba(214, 51, 132, 0.1);
+    clip-path: ellipse(95% 100% at 50% 50%);
+    border: 3px solid rgba(214, 51, 132, 0.2);
   }
   
-  .navLink:hover {
-    transform: translateY(-2px) scale(1.02);
+  .navLink:hover,
+  .navLink:active {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 
+      0 18px 45px rgba(214, 51, 132, 0.35),
+      0 10px 30px rgba(255, 182, 193, 0.4),
+      0 30px 70px rgba(214, 51, 132, 0.2),
+      inset 0 3px 0 rgba(255, 255, 255, 0.9);
+  }
+  
+  .navIcon {
+    font-size: 1.4rem;
+    margin-right: 0.8rem;
+  }
+  
+  .navText {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
   }
 }
 
@@ -426,8 +481,17 @@
   }
   
   .navLink {
-    padding: 1rem;
-    font-size: 1rem;
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 25px;
+  }
+  
+  .navText {
+    font-size: 1.1rem;
+  }
+  
+  .navIcon {
+    font-size: 1.2rem;
   }
   
   .mobileMenuToggle {
@@ -455,17 +519,17 @@
   background: linear-gradient(45deg, #ff4757, #ff3838);
 }
 
-/* Enhanced touch interactions */
+/* Enhanced touch interactions for mobile */
 @media (hover: none) and (pointer: coarse) {
   .navLink:hover {
     transform: none;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 15px rgba(214, 51, 132, 0.1);
+    background: rgba(255, 255, 255, 0.95);
   }
   
   .navLink:active {
-    transform: scale(0.98);
+    transform: scale(0.96);
     transition: transform 0.1s ease;
+    background: rgba(255, 255, 255, 1);
   }
   
   .mobileMenuToggle:hover {
@@ -474,17 +538,20 @@
   }
   
   .mobileMenuToggle:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
+    background: rgba(255, 255, 255, 0.4);
   }
 }
 
 /* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
-  .header,
-  .header * {
+  .header *,
+  .navLink,
+  .hamburger,
+  .titleMain {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0.2s !important;
   }
 }
 
@@ -498,6 +565,7 @@
   .titleMain {
     color: #fff;
     text-shadow: none;
+    -webkit-text-fill-color: #fff;
   }
   
   .navLink {
