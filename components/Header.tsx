@@ -16,16 +16,24 @@ const Header: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link href="/" className={styles.logoLink}>
-            <h1 className={styles.title}>
-              <span className={styles.heartIcon}>💕</span>
-              Male & Female
-              <span className={styles.heartIcon}>💕</span>
-            </h1>
+            <div className={styles.logoContainer}>
+              <div className={styles.logoDecoration}>
+                <span className={styles.flowerLeft}>🌸</span>
+                <h1 className={styles.title}>
+                  <span className={styles.titleMain}>Male & Female</span>
+                  <span className={styles.titleSubtext}>Forever Together</span>
+                </h1>
+                <span className={styles.flowerRight}>🌺</span>
+              </div>
+              <div className={styles.heartDecoration}>
+                <span className={styles.heartIcon}>💕</span>
+              </div>
+            </div>
           </Link>
         </div>
         
         <button 
-          className={styles.mobileMenuToggle}
+          className={`${styles.mobileMenuToggle} ${isMenuOpen ? styles.active : ''}`}
           onClick={toggleMenu}
           aria-label="Toggle navigation menu"
         >
@@ -37,19 +45,33 @@ const Header: React.FC = () => {
         <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ''}`}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
-              <Link href="/" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
-                🏠 Home
+              <Link href="/" className={`${styles.navLink} ${styles.homeLink}`} onClick={() => setIsMenuOpen(false)}>
+                <span className={styles.navIcon}>🏠</span>
+                <span className={styles.navText}>Home</span>
               </Link>
             </li>
             {navItems.map((item, index) => (
               <li key={index} className={styles.navItem}>
                 <Link href={`/${item.toLowerCase()}`} className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
-                  {item}
+                  <span className={styles.navIcon}>
+                    {item === 'Haldi' && '💛'}
+                    {item === 'Mehndi' && '🌿'}
+                    {item === 'Sangeet' && '🎵'}
+                    {item === 'Wedding' && '💒'}
+                    {item === 'Reception' && '🎉'}
+                  </span>
+                  <span className={styles.navText}>{item}</span>
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
+      </div>
+      
+      <div className={styles.headerDecorations}>
+        <div className={styles.floatingFlower1}>🌸</div>
+        <div className={styles.floatingFlower2}>🌺</div>
+        <div className={styles.floatingFlower3}>🌹</div>
       </div>
     </header>
   );

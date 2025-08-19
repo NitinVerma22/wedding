@@ -1,3 +1,4 @@
+
 .albumButton {
   position: fixed;
   bottom: 100px;
@@ -69,7 +70,6 @@
     height: 65px;
     bottom: 90px;
     right: 20px;
-    z-index: 998;
   }
 
   .albumIcon {
@@ -87,7 +87,6 @@
     height: 60px;
     bottom: 80px;
     right: 15px;
-    z-index: 998;
   }
 
   .albumIcon {
@@ -96,31 +95,6 @@
 
   .albumText {
     font-size: 0.6rem;
-  }
-}
-
-/* Landscape mobile optimization */
-@media (max-width: 768px) and (orientation: landscape) {
-  .albumButton {
-    bottom: 70px;
-    right: 15px;
-    width: 55px;
-    height: 55px;
-  }
-
-  .albumIcon {
-    font-size: 1.3rem;
-  }
-
-  .albumText {
-    font-size: 0.55rem;
-  }
-}
-
-/* Ensure it doesn't interfere with audio player */
-@media (min-width: 769px) {
-  .albumButton {
-    bottom: 120px;
   }
 }
 

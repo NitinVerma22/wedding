@@ -1,26 +1,20 @@
 
-import React, { useState } from 'react';
-import AlbumViewer from './AlbumViewer';
+import React from 'react';
 import styles from './AlbumButton.module.css';
 
 const AlbumButton: React.FC = () => {
-  const [isAlbumOpen, setIsAlbumOpen] = useState(false);
-
-  const toggleAlbum = () => {
-    setIsAlbumOpen(!isAlbumOpen);
+  const handleClick = () => {
+    // You can replace this URL with your external album website
+    window.open('https://your-external-album-website.com', '_blank');
   };
 
   return (
-    <>
-      <button className={styles.albumButton} onClick={toggleAlbum}>
-        <div className={styles.albumIcon}>
-          📖
-        </div>
-        <span className={styles.albumText}>Album</span>
-      </button>
-
-      <AlbumViewer isOpen={isAlbumOpen} onClose={() => setIsAlbumOpen(false)} />
-    </>
+    <button className={styles.albumButton} onClick={handleClick}>
+      <div className={styles.albumIcon}>
+        📖
+      </div>
+      <span className={styles.albumText}>Album</span>
+    </button>
   );
 };
 
