@@ -340,6 +340,10 @@
     position: relative;
   }
 
+  .header {
+    position: relative;
+  }
+
   .titleMain {
     font-size: 2rem;
   }
@@ -362,11 +366,11 @@
   }
 
   .nav {
-    position: fixed;
-    top: 0;
+    position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
-    bottom: 0;
+    height: calc(100vh - 100%);
     background: linear-gradient(
       135deg, 
       rgba(255, 154, 158, 0.98) 0%, 
@@ -380,6 +384,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 8px 32px rgba(255, 154, 158, 0.3);
   }
 
   .navOpen {
