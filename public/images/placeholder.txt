@@ -22,3 +22,22 @@ Gallery images:
 - sangeet1.jpg to sangeet6.jpg
 - wedding1.jpg to wedding6.jpg
 - reception1.jpg to reception6.jpg
+
+/public/images/
+├── haldi/
+│   ├── haldi-hero.webp
+│   ├── haldi-1.webp
+│   ├── haldi-2.webp
+│   └── haldi-ceremony.webp
+├── mehndi/
+│   ├── mehndi-hero.webp
+│   ├── mehndi-1.webp
+│   └── mehndi-designs.webp
+├── wedding/
+│   ├── wedding-hero.webp
+│   ├── wedding-1.webp
+│   └── wedding-ceremony.webp
+└── reception/
+    ├── reception-hero.webp
+    ├── reception-1.webp
+    └── reception-party.webp
