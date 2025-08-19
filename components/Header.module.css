@@ -366,11 +366,11 @@
   }
 
   .nav {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
-    height: calc(100vh - 100%);
+    bottom: 0;
     background: linear-gradient(
       135deg, 
       rgba(255, 154, 158, 0.98) 0%, 
