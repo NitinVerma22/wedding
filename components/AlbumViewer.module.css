@@ -1,4 +1,5 @@
 
+/* Album Overlay - Full screen modal */
 .albumOverlay {
   position: fixed;
   top: 0;
@@ -6,63 +7,54 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.95);
-  z-index: 1000;
+  backdrop-filter: blur(20px);
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0;
+  overscroll-behavior: contain;
 }
 
 .albumContainer {
   position: relative;
   width: 100%;
-  max-width: 1200px;
-  height: 90vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
+/* Close Button */
 .closeButton {
   position: absolute;
-  top: -40px;
-  right: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
-  z-index: 1001;
-  transition: background 0.3s ease;
+  z-index: 10001;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .closeButton:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
 }
 
-.orientationMessage {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 154, 158, 0.9);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 1.1rem;
-  z-index: 1002;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
+/* Loading State */
 .loading {
   display: flex;
   flex-direction: column;
@@ -73,13 +65,20 @@
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top: 3px solid white;
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top: 3px solid #ffd700;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
+  animation: spin 1.2s linear infinite;
+  margin-bottom: 2rem;
+}
+
+.loadingText {
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-family: 'Georgia', serif;
 }
 
 @keyframes spin {
@@ -87,75 +86,291 @@
   100% { transform: rotate(360deg); }
 }
 
+/* Album Book Container */
 .albumBook {
   position: relative;
-  width: 100%;
-  max-width: 900px;
-  height: 70vh;
+  max-width: 95vw;
+  max-height: 80vh;
+  background: transparent;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Desktop View */
+.desktopView {
   display: flex;
-  perspective: 1500px;
-  margin: 2rem 0;
+  width: 1200px;
+  height: 700px;
+  max-width: 90vw;
+  max-height: 75vh;
+  perspective: 2000px;
+  transform-style: preserve-3d;
 }
 
 .page {
   flex: 1;
   height: 100%;
-  background: white;
-  border-radius: 10px;
+  background: #fefefe;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.6s ease;
-  transform-style: preserve-3d;
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .leftPage {
-  margin-right: 10px;
+  margin-right: 5px;
   transform-origin: right center;
 }
 
 .rightPage {
-  margin-left: 10px;
+  margin-left: 5px;
   transform-origin: left center;
 }
 
 .bookSpine {
   position: absolute;
   left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 20px;
-  background: linear-gradient(to right, #8B4513, #654321, #8B4513);
+  top: 5%;
+  bottom: 5%;
+  width: 10px;
+  background: linear-gradient(
+    to right,
+    #8B4513 0%,
+    #A0522D 20%,
+    #654321 50%,
+    #A0522D 80%,
+    #8B4513 100%
+  );
   transform: translateX(-50%);
-  border-radius: 0 5px 5px 0;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 5;
+  border-radius: 2px;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 10;
 }
 
-.coverPage, .eventTitlePage {
+/* Mobile View */
+.mobileView {
+  display: flex;
+  width: 100vw;
+  height: 85vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.currentPage {
+  width: 85%;
+  height: 100%;
+  background: #fefefe;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.peekPage {
+  width: 70%;
+  height: 90%;
+  background: #fefefe;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  right: -55%;
+  top: 5%;
+  transform: scale(0.95);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+/* Page Content Styles */
+.coverPage {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.coverImage, .eventTitleImage {
+.coverImage {
   width: 100%;
   height: 100%;
 }
 
-.coverImage img, .eventTitleImage img {
+.coverImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.coverOverlay, .eventTitleOverlay {
+.coverOverlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, rgba(255, 154, 158, 0.8), rgba(254, 207, 239, 0.8));
+  background: linear-gradient(
+    135deg, 
+    rgba(218, 165, 32, 0.8) 0%,
+    rgba(255, 215, 0, 0.6) 50%,
+    rgba(255, 182, 193, 0.8) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+.coverTitle {
+  font-size: 3.5rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  font-family: 'Georgia', serif;
+  letter-spacing: 2px;
+}
+
+.coverSubtitle {
+  font-size: 1.8rem;
+  font-weight: 300;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  font-family: 'Georgia', serif;
+  letter-spacing: 3px;
+  margin-bottom: 2rem;
+}
+
+.decorativeElements {
+  position: absolute;
+  bottom: 3rem;
+}
+
+.heartDecor {
+  font-size: 2rem;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.indexPage {
+  padding: 4rem 3rem;
+  background: linear-gradient(135deg, #fefefe 0%, #f8f8f8 100%);
+  position: relative;
+}
+
+.indexTitle {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #8B4513;
+  margin-bottom: 3rem;
+  font-family: 'Georgia', serif;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.indexList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.indexItem {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(139, 69, 19, 0.2);
+  transition: all 0.3s ease;
+}
+
+.indexItem:hover {
+  background: rgba(255, 215, 0, 0.1);
+  padding-left: 1rem;
+  border-radius: 8px;
+}
+
+.eventName {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #8B4513;
+  min-width: 150px;
+  font-family: 'Georgia', serif;
+}
+
+.indexDots {
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    #DAA520 0px,
+    #DAA520 4px,
+    transparent 4px,
+    transparent 12px
+  );
+  margin: 0 1rem;
+}
+
+.pageNumbers {
+  font-size: 1.2rem;
+  color: #A0522D;
+  font-weight: 500;
+  min-width: 60px;
+  text-align: right;
+}
+
+.indexDecoration {
+  position: absolute;
+  bottom: 2rem;
+  right: 3rem;
+}
+
+.floralPattern {
+  font-size: 3rem;
+  opacity: 0.3;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.eventTitlePage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.eventTitleImage {
+  width: 100%;
+  height: 100%;
+}
+
+.eventTitleImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eventTitleOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(139, 69, 19, 0.7) 0%,
+    rgba(218, 165, 32, 0.6) 50%,
+    rgba(255, 215, 0, 0.7) 100%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,99 +379,53 @@
   color: white;
 }
 
-.coverTitle, .eventTitle {
-  font-size: 2.5rem;
-  font-weight: bold;
+.eventTitle {
+  font-size: 3rem;
+  font-weight: 300;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  font-family: 'Georgia', serif;
+  letter-spacing: 2px;
   margin-bottom: 1rem;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-  font-family: 'Georgia', serif;
 }
 
-.coverHearts {
-  font-size: 1.5rem;
-  animation: heartbeat 2s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-.indexPage {
-  padding: 3rem 2rem;
-  background: linear-gradient(135deg, #ffeef0, #fff5f7);
-}
-
-.indexTitle {
+.titleDecoration {
   font-size: 2rem;
-  text-align: center;
-  color: #d63384;
-  margin-bottom: 2rem;
-  font-family: 'Georgia', serif;
+  animation: twinkle 2s ease-in-out infinite;
 }
 
-.indexList {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.ornament {
+  color: #FFD700;
 }
 
-.indexItem {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 1rem;
-  border-radius: 10px;
-  transition: background 0.3s ease;
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
 }
 
-.indexItem:hover {
-  background: rgba(255, 154, 158, 0.1);
-}
-
-.eventName {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #d63384;
-  min-width: 120px;
-}
-
-.dots {
-  flex: 1;
-  color: #ccc;
-  overflow: hidden;
-  white-space: nowrap;
-  margin: 0 1rem;
-}
-
-.pageNumbers {
-  font-size: 1.1rem;
-  color: #666;
-  min-width: 60px;
-  text-align: right;
-}
-
-.imagesPage {
+.imagePage {
   width: 100%;
   height: 100%;
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #fefefe;
 }
 
 .imageContainer {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .imageContainer:hover {
   transform: scale(1.02);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
 }
 
 .imageContainer img {
@@ -271,7 +440,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -284,52 +453,105 @@
 }
 
 .zoomIcon {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: white;
-  animation: bounce 1.5s infinite;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 .emptyPage {
-  background: #f8f9fa;
+  background: #f8f8f8;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-style: italic;
 }
 
+/* Navigation Controls */
 .controls {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 2rem;
-  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .navButton {
-  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #DAA520, #FFD700);
   border: none;
-  border-radius: 25px;
-  padding: 0.8rem 1.5rem;
+  border-radius: 50%;
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+  box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navButton:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 154, 158, 0.4);
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: 0 6px 20px rgba(218, 165, 32, 0.5);
 }
 
 .navButton:disabled {
-  opacity: 0.5;
+  opacity: 0.3;
   cursor: not-allowed;
+  transform: none;
 }
 
-.pageInfo {
+.pageIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pageCount {
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
+  letter-spacing: 1px;
 }
 
+.dotIndicators {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.activeDot {
+  background: #FFD700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  transform: scale(1.2);
+}
+
+/* Fullscreen Image Viewer */
 .fullscreenOverlay {
   position: fixed;
   top: 0;
@@ -337,7 +559,7 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.95);
-  z-index: 2000;
+  z-index: 20000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -348,24 +570,28 @@
   position: relative;
   max-width: 95vw;
   max-height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fullscreenImage {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
 }
 
 .fullscreenClose {
   position: absolute;
-  top: -40px;
+  top: -50px;
   right: 0;
+  width: 40px;
+  height: 40px;
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
@@ -376,134 +602,128 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* Mobile Responsiveness */
+/* Mobile Responsive Design */
 @media (max-width: 768px) {
-  .albumContainer {
-    padding: 1rem 0.5rem;
-    height: 100vh;
+  .albumBook.mobile .currentPage,
+  .albumBook.mobile .peekPage {
+    border-radius: 12px;
   }
 
-  .albumBook {
-    height: 65vh;
-    max-width: 100%;
-    margin: 1rem 0;
+  .coverTitle {
+    font-size: 2.5rem;
   }
 
-  .coverTitle, .eventTitle {
-    font-size: 1.8rem;
+  .coverSubtitle {
+    font-size: 1.3rem;
+  }
+
+  .eventTitle {
+    font-size: 2.2rem;
   }
 
   .indexTitle {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  }
+
+  .indexPage {
+    padding: 2rem 1.5rem;
   }
 
   .eventName {
-    font-size: 1rem;
-    min-width: 80px;
+    font-size: 1.2rem;
+    min-width: 100px;
   }
 
-  .navButton {
-    padding: 0.8rem 1.2rem;
-    font-size: 0.9rem;
-    min-width: 80px;
+  .pageNumbers {
+    font-size: 1rem;
   }
 
   .controls {
+    bottom: 20px;
     gap: 1rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    padding: 0.8rem 1.5rem;
   }
 
-  .pageInfo {
-    order: -1;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 1rem;
+  .navButton {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
   }
 
   .closeButton {
-    top: 10px;
-    right: 10px;
-    width: 35px;
-    height: 35px;
-    font-size: 1.2rem;
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+
+  .imagePage {
+    padding: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .albumContainer {
-    padding: 0.5rem;
+  .coverTitle {
+    font-size: 2rem;
   }
 
-  .albumBook {
-    height: auto;
-    min-height: 60vh;
-    flex-direction: column;
-    gap: 10px;
+  .coverSubtitle {
+    font-size: 1.1rem;
   }
 
-  .page {
-    flex: none;
-    height: 45vh;
-    margin: 0;
-    width: 100%;
-  }
-
-  .leftPage, .rightPage {
-    margin: 0;
-    transform-origin: center;
-  }
-
-  .bookSpine {
-    display: none;
-  }
-
-  .coverTitle, .eventTitle {
-    font-size: 1.5rem;
+  .eventTitle {
+    font-size: 1.8rem;
   }
 
   .indexTitle {
-    font-size: 1.3rem;
-  }
-
-  .indexPage {
-    padding: 2rem 1rem;
-  }
-
-  .eventName {
-    font-size: 0.9rem;
-    min-width: 70px;
-  }
-
-  .pageNumbers {
-    font-size: 0.9rem;
-  }
-
-  .navButton {
-    padding: 0.7rem 1rem;
-    font-size: 0.85rem;
-    min-width: 70px;
+    font-size: 1.6rem;
   }
 
   .controls {
     gap: 0.8rem;
+    padding: 0.6rem 1rem;
   }
 
-  .orientationMessage {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 8px;
+  .navButton {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .pageCount {
+    font-size: 0.8rem;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
   }
 }
 
-/* Landscape mode optimizations */
-@media (orientation: landscape) and (max-width: 768px) {
-  .albumBook {
-    height: 75vh;
+/* Touch support enhancements */
+@media (hover: none) and (pointer: coarse) {
+  .imageContainer:hover {
+    transform: none;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 
-  .orientationMessage {
-    display: none;
+  .navButton:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .imageContainer:active {
+    transform: scale(0.98);
+  }
+
+  .navButton:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Pinch zoom support for mobile images */
+@media (max-width: 768px) {
+  .fullscreenImage {
+    touch-action: pinch-zoom;
   }
 }
