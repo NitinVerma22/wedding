@@ -379,12 +379,14 @@
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .albumContainer {
-    padding: 0.5rem;
+    padding: 1rem 0.5rem;
+    height: 100vh;
   }
 
   .albumBook {
-    height: 60vh;
+    height: 65vh;
     max-width: 100%;
+    margin: 1rem 0;
   }
 
   .coverTitle, .eventTitle {
@@ -401,33 +403,97 @@
   }
 
   .navButton {
-    padding: 0.6rem 1rem;
+    padding: 0.8rem 1.2rem;
     font-size: 0.9rem;
+    min-width: 80px;
   }
 
   .controls {
     gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pageInfo {
+    order: -1;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .closeButton {
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
+  .albumContainer {
+    padding: 0.5rem;
+  }
+
   .albumBook {
-    flex-direction: column;
     height: auto;
+    min-height: 60vh;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .page {
     flex: none;
-    height: 50vh;
-    margin: 5px 0;
+    height: 45vh;
+    margin: 0;
+    width: 100%;
   }
 
   .leftPage, .rightPage {
-    margin: 5px 0;
+    margin: 0;
+    transform-origin: center;
   }
 
   .bookSpine {
     display: none;
+  }
+
+  .coverTitle, .eventTitle {
+    font-size: 1.5rem;
+  }
+
+  .indexTitle {
+    font-size: 1.3rem;
+  }
+
+  .indexPage {
+    padding: 2rem 1rem;
+  }
+
+  .eventName {
+    font-size: 0.9rem;
+    min-width: 70px;
+  }
+
+  .pageNumbers {
+    font-size: 0.9rem;
+  }
+
+  .navButton {
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    min-width: 70px;
+  }
+
+  .controls {
+    gap: 0.8rem;
+  }
+
+  .orientationMessage {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
   }
 }
 

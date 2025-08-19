@@ -1,4 +1,3 @@
-
 .albumButton {
   position: fixed;
   bottom: 100px;
@@ -63,17 +62,36 @@
   }
 }
 
-/* Responsive adjustments */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
+  .albumButton {
+    width: 65px;
+    height: 65px;
+    bottom: 90px;
+    right: 20px;
+    z-index: 998;
+  }
+
+  .albumIcon {
+    font-size: 1.6rem;
+  }
+
+  .albumText {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
   .albumButton {
     width: 60px;
     height: 60px;
     bottom: 80px;
     right: 15px;
+    z-index: 998;
   }
 
   .albumIcon {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .albumText {
@@ -81,12 +99,13 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
   .albumButton {
+    bottom: 70px;
+    right: 15px;
     width: 55px;
     height: 55px;
-    bottom: 70px;
-    right: 10px;
   }
 
   .albumIcon {
@@ -102,5 +121,18 @@
 @media (min-width: 769px) {
   .albumButton {
     bottom: 120px;
+  }
+}
+
+/* Touch-friendly hover effects for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .albumButton:hover {
+    transform: none;
+    box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4);
+  }
+
+  .albumButton:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
   }
 }
