@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AudioPlayer from '../components/AudioPlayer';
+import AlbumButton from '../components/AlbumButton';
 import styles from '../styles/EventPage.module.css';
 
 const Sangeet = () => {
@@ -57,6 +58,7 @@ const Sangeet = () => {
       </section>
       <Footer />
       <AudioPlayer audioSrc="/audio/sangeet-music.mp3" pageName="Sangeet" />
+      <AlbumButton />
     </div>
   );
 };

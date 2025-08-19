@@ -1,0 +1,443 @@
+
+.albumOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.albumContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.orientationMessage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 154, 158, 0.9);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.1rem;
+  z-index: 1002;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: white;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.albumBook {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 70vh;
+  display: flex;
+  perspective: 1500px;
+  margin: 2rem 0;
+}
+
+.page {
+  flex: 1;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.leftPage {
+  margin-right: 10px;
+  transform-origin: right center;
+}
+
+.rightPage {
+  margin-left: 10px;
+  transform-origin: left center;
+}
+
+.bookSpine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(to right, #8B4513, #654321, #8B4513);
+  transform: translateX(-50%);
+  border-radius: 0 5px 5px 0;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+}
+
+.coverPage, .eventTitlePage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.coverImage, .eventTitleImage {
+  width: 100%;
+  height: 100%;
+}
+
+.coverImage img, .eventTitleImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coverOverlay, .eventTitleOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 154, 158, 0.8), rgba(254, 207, 239, 0.8));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.coverTitle, .eventTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  font-family: 'Georgia', serif;
+}
+
+.coverHearts {
+  font-size: 1.5rem;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.indexPage {
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #ffeef0, #fff5f7);
+}
+
+.indexTitle {
+  font-size: 2rem;
+  text-align: center;
+  color: #d63384;
+  margin-bottom: 2rem;
+  font-family: 'Georgia', serif;
+}
+
+.indexList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.indexItem {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.indexItem:hover {
+  background: rgba(255, 154, 158, 0.1);
+}
+
+.eventName {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #d63384;
+  min-width: 120px;
+}
+
+.dots {
+  flex: 1;
+  color: #ccc;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 1rem;
+}
+
+.pageNumbers {
+  font-size: 1.1rem;
+  color: #666;
+  min-width: 60px;
+  text-align: right;
+}
+
+.imagesPage {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.imageContainer:hover {
+  transform: scale(1.02);
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.imageContainer:hover .imageOverlay {
+  opacity: 1;
+}
+
+.zoomIcon {
+  font-size: 2rem;
+  color: white;
+  animation: bounce 1.5s infinite;
+}
+
+.emptyPage {
+  background: #f8f9fa;
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.navButton {
+  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 1.5rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 154, 158, 0.3);
+}
+
+.navButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 154, 158, 0.4);
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.fullscreenOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.fullscreenContainer {
+  position: relative;
+  max-width: 95vw;
+  max-height: 95vh;
+}
+
+.fullscreenImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.fullscreenClose {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.fullscreenClose:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .albumContainer {
+    padding: 0.5rem;
+  }
+
+  .albumBook {
+    height: 60vh;
+    max-width: 100%;
+  }
+
+  .coverTitle, .eventTitle {
+    font-size: 1.8rem;
+  }
+
+  .indexTitle {
+    font-size: 1.5rem;
+  }
+
+  .eventName {
+    font-size: 1rem;
+    min-width: 80px;
+  }
+
+  .navButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .controls {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .albumBook {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .page {
+    flex: none;
+    height: 50vh;
+    margin: 5px 0;
+  }
+
+  .leftPage, .rightPage {
+    margin: 5px 0;
+  }
+
+  .bookSpine {
+    display: none;
+  }
+}
+
+/* Landscape mode optimizations */
+@media (orientation: landscape) and (max-width: 768px) {
+  .albumBook {
+    height: 75vh;
+  }
+
+  .orientationMessage {
+    display: none;
+  }
+}
