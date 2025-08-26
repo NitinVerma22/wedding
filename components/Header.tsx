@@ -24,6 +24,7 @@ const Header: React.FC<HeaderProps> = ({ name, nav }) => {
 
   return (
     <header className={styles.header}>
+      <FlowerRain/>
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link href="/" className={styles.logoLink}>

@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Header
-        name="Male & Female" //Change Name of Couples
+        name="Male & Female"
         nav={["Haldi", "Mehndi", "Sangeet", "Wedding", "Reception"]}
       />
       <section className={styles.hero}>
