@@ -5,7 +5,7 @@ import path from 'path';
 
 type Data = {
   images: string[];
-  heroImage: string;
+  heroImages: string[];
 };
 
 export default function handler(
@@ -15,58 +15,50 @@ export default function handler(
   const { event } = req.query;
   
   if (typeof event !== 'string') {
-    return res.status(400).json({ images: [], heroImage: '' });
+    return res.status(400).json({ images: [], heroImages: [] });
   }
 
   const eventDir = path.join(process.cwd(), 'public', 'images', event.toLowerCase());
   
   try {
     // Check if event directory exists
-    if (!fs.existsSync(eventDir)) {
-      return res.status(200).json({ 
-        images: [], 
-        heroImage: `/images/${event.toLowerCase()}/${event.toLowerCase()}-hero.webp` 
-      });
-    }
+  if (!fs.existsSync(eventDir)) {
+    return res.status(200).json({ 
+      images: [], 
+      heroImages: [
+        `/images/${event.toLowerCase()}/${event.toLowerCase()}-1.webp`,
+        `/images/${event.toLowerCase()}/${event.toLowerCase()}-2.webp`,
+        `/images/${event.toLowerCase()}/${event.toLowerCase()}-3.webp`
+      ]
+    });
+  }
 
     const files = fs.readdirSync(eventDir);
     
-    // Filter images for the specific event (excluding hero images)
+    // Filter images for the specific event
     const eventImages = files
       .filter(file => {
         const name = file.toLowerCase();
-        return !name.includes('hero') &&
-               (name.endsWith('.jpg') || name.endsWith('.jpeg') || name.endsWith('.png') || name.endsWith('.webp'));
+        return (name.endsWith('.jpg') || name.endsWith('.jpeg') || name.endsWith('.png') || name.endsWith('.webp'));
       })
       .map(file => `/images/${event.toLowerCase()}/${file}`)
       .sort(); // Sort to maintain consistent order
 
-    // Look for hero image in different formats (prefer WebP)
-    let heroImage = `/images/${event.toLowerCase()}/${event.toLowerCase()}-hero.webp`;
-    const heroFiles = files.filter(file => file.toLowerCase().includes('hero'));
-    if (heroFiles.length > 0) {
-      // Prefer WebP, then other formats
-      const webpHero = heroFiles.find(file => file.toLowerCase().endsWith('.webp'));
-      const jpgHero = heroFiles.find(file => file.toLowerCase().endsWith('.jpg') || file.toLowerCase().endsWith('.jpeg'));
-      const pngHero = heroFiles.find(file => file.toLowerCase().endsWith('.png'));
-      
-      if (webpHero) {
-        heroImage = `/images/${event.toLowerCase()}/${webpHero}`;
-      } else if (jpgHero) {
-        heroImage = `/images/${event.toLowerCase()}/${jpgHero}`;
-      } else if (pngHero) {
-        heroImage = `/images/${event.toLowerCase()}/${pngHero}`;
-      }
-    }
+    // Get first 3 images for carousel (or all available if less than 3)
+    const heroImages = eventImages.slice(0, 3);
 
     res.status(200).json({ 
       images: eventImages, 
-      heroImage 
+      heroImages 
     });
   } catch (error) {
     res.status(500).json({ 
       images: [], 
-      heroImage: `/images/${event.toLowerCase()}/${event.toLowerCase()}-hero.webp` 
+      heroImages: [
+        `/images/${event.toLowerCase()}/${event.toLowerCase()}-1.webp`,
+        `/images/${event.toLowerCase()}/${event.toLowerCase()}-2.webp`,
+        `/images/${event.toLowerCase()}/${event.toLowerCase()}-3.webp`
+      ]
     });
   }
 }

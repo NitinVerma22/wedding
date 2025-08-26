@@ -4,18 +4,20 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AudioPlayer from '../components/AudioPlayer';
 import AlbumButton from '../components/AlbumButton';
+import HeroCarousel from '../components/HeroCarousel';
+
 import styles from '../styles/EventPage.module.css';
 
 const Mehndi = () => {
   const [images, setImages] = useState<string[]>([]);
-  const [heroImage, setHeroImage] = useState('/images/mehndi-hero.jpg');
+  const [heroImages, setHeroImages] = useState<string[]>([]);
 
   useEffect(() => {
     fetch('/api/gallery/mehndi')
       .then(res => res.json())
       .then(data => {
         setImages(data.images);
-        setHeroImage(data.heroImage);
+        setHeroImages(data.heroImages);
       })
       .catch(error => console.error('Error fetching images:', error));
   }, []);
@@ -25,14 +27,17 @@ const Mehndi = () => {
       <Header name="Male & Female" nav={["Haldi", "Mehndi", "Sangeet", "Wedding", "Reception"]} />
       
       <section className={styles.hero}>
-        <div className={styles.heroImage}>
-          <img src={heroImage} alt="Mehndi Ceremony" />
-        </div>
+     
+        {heroImages.length > 0 && (
+  <HeroCarousel 
+    images={heroImages} 
+    title="Mehndi Celebration"
+    subtitle="Beautiful henna designs and joyful celebrations with loved ones"
+  />
+)}
+
         <div className={styles.heroOverlay}></div>
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>Mehndi Celebration</h1>
-          <p className={styles.heroSubtitle}>Beautiful henna designs and joyful celebrations with loved ones</p>
-        </div>
+   
       </section>
 
       <section className={styles.gallery}>

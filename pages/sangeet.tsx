@@ -1,21 +1,21 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AudioPlayer from '../components/AudioPlayer';
 import AlbumButton from '../components/AlbumButton';
+import HeroCarousel from '../components/HeroCarousel';
 import styles from '../styles/EventPage.module.css';
 
 const Sangeet = () => {
   const [images, setImages] = useState<string[]>([]);
-  const [heroImage, setHeroImage] = useState('/images/sangeet-hero.jpg');
+  const [heroImages, setHeroImages] = useState<string[]>([]);
 
   useEffect(() => {
     fetch('/api/gallery/sangeet')
       .then(res => res.json())
       .then(data => {
         setImages(data.images);
-        setHeroImage(data.heroImage);
+        setHeroImages(data.heroImages);
       })
       .catch(error => console.error('Error fetching images:', error));
   }, []);
@@ -25,14 +25,16 @@ const Sangeet = () => {
       <Header name="Male & Female" nav={["Haldi", "Mehndi", "Sangeet", "Wedding", "Reception"]} />
       
       <section className={styles.hero}>
-        <div className={styles.heroImage}>
-          <img src={heroImage} alt="Sangeet Night" />
-        </div>
+     
+       {heroImages.length > 0 && (
+  <HeroCarousel 
+    images={heroImages} 
+    title="Sangeet Night"
+    subtitle="Musical performances, dance, and endless entertainment"
+  />
+)}
+
         <div className={styles.heroOverlay}></div>
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>Sangeet Night</h1>
-          <p className={styles.heroSubtitle}>Musical performances, dance, and endless entertainment</p>
-        </div>
       </section>
 
       <section className={styles.gallery}>

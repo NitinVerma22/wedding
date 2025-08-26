@@ -1,20 +1,25 @@
-
-import React from 'react';
-import styles from './AlbumButton.module.css';
+import React from "react";
+import styles from "./AlbumButton.module.css";
+import Album from "./Album";
+import { useAlbum } from "../contexts/AlbumContext";
 
 const AlbumButton: React.FC = () => {
-  const handleClick = () => {
-    // You can replace this URL with your external album website
-    window.open('https://your-external-album-website.com', '_blank');
-  };
+  const { isAlbumOpen, openAlbum, closeAlbum } = useAlbum();
 
   return (
-    <button className={styles.albumButton} onClick={handleClick}>
-      <div className={styles.albumIcon}>
-        📖
-      </div>
-      <span className={styles.albumText}>Album</span>
-    </button>
+    <div>
+      {/* Floating Album Button */}
+      <button
+        className={styles.albumButton}
+        onClick={() => openAlbum()}
+        aria-label="Open Album"
+      >📖</button>
+
+      {/* Album Full Page Zoom */}
+      {isAlbumOpen && (
+        <Album onClose={closeAlbum} />
+      )}
+    </div>
   );
 };
 

@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './Header.module.css';
+import { useAlbum } from '../contexts/AlbumContext';
+import FlowerRain from "./FlowerRain";
 
 interface HeaderProps {
   name: string;
@@ -10,10 +12,15 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ name, nav }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAlbumOpen } = useAlbum();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  if (isAlbumOpen) {
+    return null;
+  }
 
   return (
     <header className={styles.header}>
@@ -69,6 +76,7 @@ const Header: React.FC<HeaderProps> = ({ name, nav }) => {
               </li>
             ))}
           </ul>
+          <FlowerRain trigger={Date.now()} id="header-flowers" />
         </nav>
       </div>
       
