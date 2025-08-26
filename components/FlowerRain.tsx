@@ -43,9 +43,9 @@ const FlowerRain = ({ trigger, id }: FlowerRainProps) => {
           shape: {
             type: "image",
             image: [
-              { src: "/images/flower-1.png", width: 32, height: 32 },
-              { src: "/images/flower-2.png", width: 32, height: 32 },
-              { src: "/images/flower-3.png", width: 32, height: 32 },
+              { src: "/flower-2.png", width: 32, height: 32 },
+              { src: "/flower-1.png", width: 32, height: 32 },
+              { src: "/flower-3.png", width: 32, height: 32 },
             ],
           },
         },

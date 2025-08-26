@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Header
-        name="Nitin & Avni" //Change Name of Couples
+        name="Male & Female" //Change Name of Couples
         nav={["Haldi", "Mehndi", "Sangeet", "Wedding", "Reception"]}
       />
       <section className={styles.hero}>
@@ -38,37 +38,37 @@ const Home: NextPage = () => {
           <div className={styles.eventsGrid}>
             <EventCard
               title="Haldi"
-              image="/images/haldi.png"
+              image="/haldi.png"
               description="A traditional ceremony with turmeric paste, bringing good luck and prosperity"
               link="/haldi"
             />
             <EventCard
               title="Mehndi"
-              image="/images/mehndi.png"
+              image="/mehndi.png"
               description="Beautiful henna designs and celebration with music and dance"
               link="/mehndi"
             />
             <EventCard
               title="Sangeet"
-              image="/images/sangeet.png"
+              image="/sangeet.png"
               description="Musical night filled with performances, laughter, and joy"
               link="/sangeet"
             />
             <EventCard
               title="Wedding"
-              image="/images/wedding.png"
+              image="/wedding.png"
               description="The sacred ceremony where two hearts become one forever"
               link="/wedding"
             />
             <EventCard
               title="Reception"
-              image="/images/reception.png"
+              image="/reception.png"
               description="Celebration dinner with family and friends to honor the newlyweds"
               link="/reception"
             />
             <EventCard
               title="Album"
-              image="/images/album.png"
+              image="/album.png"
               description="Complete collection of all our beautiful wedding moments and memories"
               link="/album"
             />
