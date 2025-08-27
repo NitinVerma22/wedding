@@ -59,7 +59,7 @@ const Sangeet = () => {
         </div>
       </section>
       <Footer />
-      <AudioPlayer audioSrc="/audio/sangeet-music.mp3" pageName="Sangeet" />
+      <AudioPlayer pageName="Sangeet" />
       <AlbumButton />
     </div>
   );

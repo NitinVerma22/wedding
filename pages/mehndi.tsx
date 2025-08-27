@@ -62,7 +62,7 @@ const Mehndi = () => {
         </div>
       </section>
       <Footer />
-      <AudioPlayer audioSrc="/audio/mehndi-music.mp3" pageName="Mehndi" />
+      <AudioPlayer pageName="Mehndi" />
       <AlbumButton />
     </div>
   );

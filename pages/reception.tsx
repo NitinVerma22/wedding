@@ -60,7 +60,7 @@ const Reception = () => {
         </div>
       </section>
       <Footer />
-      <AudioPlayer audioSrc="/audio/reception-music.mp3" pageName="Reception" />
+      <AudioPlayer pageName="Reception" />
       <AlbumButton />
     </div>
   );

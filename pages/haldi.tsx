@@ -65,7 +65,7 @@ const Haldi = () => {
         
       </section>
       <Footer />
-      <AudioPlayer audioSrc="/audio/haldi-music.mp3" pageName="Haldi" />
+      <AudioPlayer pageName="Haldi" />
       <AlbumButton />
     </div>
   );

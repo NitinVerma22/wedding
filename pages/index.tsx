@@ -75,7 +75,7 @@ const Home: NextPage = () => {
       </main>
       <Footer />
       <Button />
-      <AudioPlayer audioSrc="/audio/home-music.mp3" pageName="Wedding" />
+      <AudioPlayer pageName="Wedding" />
   
     </div>
   );

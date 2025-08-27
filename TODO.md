@@ -1,16 +1,19 @@
-# FlowerRain Fix Plan
+# Image Aspect Ratio Fix Plan
 
-## Issues Identified:
-1. Multiple FlowerRain instances with same ID "tsparticles" causing conflicts
-2. HeroCarousel has duplicate FlowerRain instances
-3. Potential CSS conflicts with existing flower animations
+## Steps to Complete:
 
-## Steps to Fix:
-- [ ] Modify FlowerRain.tsx to accept unique ID prop
-- [ ] Remove duplicate FlowerRain from HeroCarousel.tsx
-- [ ] Update Header.tsx to use unique ID
-- [ ] Update index.tsx to use unique ID
-- [ ] Update HeroCarousel.tsx to use unique ID
-- [ ] Verify z-index and positioning
+1. [x] Update EventPage.module.css - Changed object-fit: cover to contain and removed fixed aspect ratio
+2. [x] Update HeroCarousel.module.css - Changed object-fit: cover to contain
+3. [x] Update Album.module.css - Changed object-fit: cover to contain
+4. [x] Update EventCard.module.css - Changed object-fit: cover to contain and removed fixed height
+5. [ ] Test changes to ensure images maintain aspect ratio properly
 
-## Current Status: In Progress
+## Changes Made:
+
+- **EventPage.module.css**: Changed `object-fit: cover` to `contain`, removed `aspect-ratio: 4/3`, and made containers flexible
+- **HeroCarousel.module.css**: Changed `object-fit: cover` to `contain`
+- **Album.module.css**: Changed `object-fit: cover` to `contain`
+- **EventCard.module.css**: Changed `object-fit: cover` to `contain`, changed fixed `height: 250px` to flexible `height: auto` with `min-height`
+
+## Current Status:
+All CSS updates completed. Ready for testing.

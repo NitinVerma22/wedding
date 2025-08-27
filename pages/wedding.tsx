@@ -60,7 +60,7 @@ const Wedding = () => {
         </div>
       </section>
       <Footer />
-      <AudioPlayer audioSrc="/audio/wedding-music.mp3" pageName="Wedding" />
+      <AudioPlayer pageName="Wedding" />
       <AlbumButton />
     </div>
   );
