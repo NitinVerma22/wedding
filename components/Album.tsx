@@ -74,22 +74,36 @@ const Album: React.FC<AlbumProps> = ({ onClose, folder = "images", autoFlipMs = 
     setZoomedPage(prev => prev === index ? null : index);
   };
 
-  const handleShare = (imageSrc: string) => {
-    const message = `Check out this beautiful moment from ${coupleNames}'s wedding! ${imageSrc} View more at ${window.location.origin}`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
-  };
+
 
   return (
     <div className={styles.overlay} role="dialog" aria-modal="true">
       <div className={styles.controls}>
-        <button 
+        <button
           className={`${styles.autoFlipBtn} ${isAutoFlipEnabled ? styles.active : ''} ${styles.blink}`}
-          onClick={toggleAutoFlip} 
+          onClick={toggleAutoFlip}
           aria-label={isAutoFlipEnabled ? "Disable auto flip" : "Enable auto flip"}
         >
           {isAutoFlipEnabled ? '⏸' : '▶'}
         </button>
+        <button className={styles.downloadBtn} onClick={() => {
+          if (!bookRef.current) return;
+          const flip = bookRef.current.pageFlip();
+          if (!flip) return;
+          const currentIndex = flip.getCurrentPageIndex();
+          let currentImage = images[currentIndex];
+          if (!currentImage) return;
+          // Replace .webp extension with .png for download if present
+          currentImage = currentImage.replace(/\.webp$/i, '.png');
+          // Create a temporary link to trigger download
+          const link = document.createElement('a');
+          link.href = currentImage;
+          // Replace .webp extension with .png for filename if present
+          link.download = (currentImage.split('/').pop() || 'image.png').replace(/\.webp$/i, '.png');
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }} aria-label="Download current image">⬇️</button>
         <button className={styles.closeBtn} onClick={onClose} aria-label="Close album">✕</button>
       </div>
 
@@ -115,13 +129,7 @@ const Album: React.FC<AlbumProps> = ({ onClose, folder = "images", autoFlipMs = 
       onClick={() => handlePageClick(index)}
     >
       <img src={src} alt={`page-${index}`} />
-      <button
-        className={styles.shareBtn}
-        onClick={(e) => { e.stopPropagation(); handleShare(src); }}
-        aria-label="Share image on WhatsApp"
-      >
-        📤
-      </button>
+
     </div>
   ))}
 </HTMLFlipBook>

@@ -29,3 +29,18 @@
 .sidebar button:hover {
   background-color: #005bb5;
 }
+
+.closeButton {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background: none;
+  border: none;
+  font-size: 10px;
+  cursor: pointer;
+  color: #333;
+}
+
+.closeButton:hover {
+  color: #f22cd8;
+}

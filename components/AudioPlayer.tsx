@@ -10,6 +10,7 @@ interface AudioPlayerProps {
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ pageName }) => {
   const { isPlaying, togglePlay, setCurrentPage } = useAudio();
   const [showSidebar, setShowSidebar] = useState(false);
+  const [sidebarDismissed, setSidebarDismissed] = useState(false);
 
   useEffect(() => {
     // Update the current page in the audio context when component mounts
@@ -18,13 +19,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ pageName }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (!isPlaying) {
+      if (!isPlaying && !sidebarDismissed) {
         setShowSidebar(true);
       }
-    }, 4000); // Show sidebar after 4 seconds if audio is not playing
+    }, 4000); // Show sidebar after 4 seconds if audio is not playing and not dismissed
 
     return () => clearTimeout(timer);
-  }, [isPlaying]);
+  }, [isPlaying, sidebarDismissed]);
 
   return (
     <>
@@ -39,8 +40,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ pageName }) => {
       </button>
 
       {/* Sidebar for user interaction */}
-      {showSidebar && (
-        <AudioSidebar onClose={() => setShowSidebar(false)} />
+      {showSidebar && !sidebarDismissed && (
+        <AudioSidebar
+          onClose={() => setShowSidebar(false)}
+          onDismiss={() => {
+            setShowSidebar(false);
+            setSidebarDismissed(true);
+          }}
+        />
       )}
     </>
   );

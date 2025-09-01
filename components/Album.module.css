@@ -75,6 +75,31 @@
   border-color: rgba(0, 255, 0, 0.5);
 }
 
+.downloadBtn {
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.downloadBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.downloadBtn:active {
+  transform: scale(0.9);
+}
+
 .bookWrapper {
   width: 90%;
   height: 90%;
@@ -101,30 +126,4 @@
   object-fit: cover;
 }
 
-.shareBtn {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  cursor: pointer;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  font-size: 1.2rem;
-}
 
-.shareBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
-}
-
-.shareBtn:active {
-  transform: scale(0.9);
-}
