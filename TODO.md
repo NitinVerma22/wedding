@@ -1,9 +1,7 @@
-# TODO: Album View Download Button Implementation
+# TODO: Fix Image Download Button After Deployment
 
 ## Tasks
-- [x] Remove share button from image pages in Album.tsx
-- [x] Add download button to controls in Album.tsx
-- [x] Implement download handler for current image
-- [x] Add styles for download button in Album.module.css
-- [x] Update download to use PNG/JPG instead of WebP
-- [x] Test download functionality
+- [x] Update download button logic in components/Album.tsx to remove .webp to .png replacement
+- [x] Add error handling to download button click handler
+- [x] Modify download to fetch image as blob to handle deployment URL issues
+- [ ] Verify fix works after deployment

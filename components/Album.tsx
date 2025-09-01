@@ -86,23 +86,30 @@ const Album: React.FC<AlbumProps> = ({ onClose, folder = "images", autoFlipMs = 
         >
           {isAutoFlipEnabled ? '⏸' : '▶'}
         </button>
-        <button className={styles.downloadBtn} onClick={() => {
+        <button className={styles.downloadBtn} onClick={async () => {
           if (!bookRef.current) return;
           const flip = bookRef.current.pageFlip();
           if (!flip) return;
           const currentIndex = flip.getCurrentPageIndex();
           let currentImage = images[currentIndex];
           if (!currentImage) return;
-          // Replace .webp extension with .png for download if present
-          currentImage = currentImage.replace(/\.webp$/i, '.png');
-          // Create a temporary link to trigger download
-          const link = document.createElement('a');
-          link.href = currentImage;
-          // Replace .webp extension with .png for filename if present
-          link.download = (currentImage.split('/').pop() || 'image.png').replace(/\.webp$/i, '.png');
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          try {
+            // Fetch the image as blob to handle deployment URL issues
+            const response = await fetch(currentImage);
+            if (!response.ok) throw new Error('Failed to fetch image');
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = currentImage.split('/').pop() || 'image.webp';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+          } catch (error) {
+            console.error('Download failed:', error);
+            alert('Download failed. Please try again.');
+          }
         }} aria-label="Download current image">⬇️</button>
         <button className={styles.closeBtn} onClick={onClose} aria-label="Close album">✕</button>
       </div>
