@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import styles from "./Album.module.css";
+import { useAlbum } from "../contexts/AlbumContext";
 
 interface AlbumProps {
   onClose: () => void;
@@ -15,6 +16,7 @@ const Album: React.FC<AlbumProps> = ({ onClose, folder = "images", autoFlipMs = 
   const [zoomedPage, setZoomedPage] = useState<number | null>(null);
   const bookRef = useRef<any>(null); // react-pageflip doesn't provide strong TS types
   const autoFlipIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const { coupleNames } = useAlbum();
 
   // Fetch images
   useEffect(() => {
@@ -72,6 +74,12 @@ const Album: React.FC<AlbumProps> = ({ onClose, folder = "images", autoFlipMs = 
     setZoomedPage(prev => prev === index ? null : index);
   };
 
+  const handleShare = (imageSrc: string) => {
+    const message = `Check out this beautiful moment from ${coupleNames}'s wedding! ${imageSrc} View more at ${window.location.origin}`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+  };
+
   return (
     <div className={styles.overlay} role="dialog" aria-modal="true">
       <div className={styles.controls}>
@@ -107,6 +115,13 @@ const Album: React.FC<AlbumProps> = ({ onClose, folder = "images", autoFlipMs = 
       onClick={() => handlePageClick(index)}
     >
       <img src={src} alt={`page-${index}`} />
+      <button
+        className={styles.shareBtn}
+        onClick={(e) => { e.stopPropagation(); handleShare(src); }}
+        aria-label="Share image on WhatsApp"
+      >
+        📤
+      </button>
     </div>
   ))}
 </HTMLFlipBook>

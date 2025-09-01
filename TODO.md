@@ -1,19 +1,17 @@
-# Image Aspect Ratio Fix Plan
+# TODO for Album Image Full Width and WhatsApp Share Button Feature
 
-## Steps to Complete:
+- [x] Update `components/Album.module.css` to make album images cover full width and height using object-fit: cover.
+- [x] Modify `components/Album.tsx`:
+  - [x] Add a share button UI on each image page.
+  - [x] Implement WhatsApp share functionality to share the image URL with a personalized message.
+  - [x] Get male and female names from header or context and include them in the share message.
+  - [x] Add click handler on share button to open WhatsApp share URL.
+- [x] Modify `components/AlbumContext.tsx` to provide male and female names to `Album.tsx`.
+- [ ] Test the album view for full width images and share button functionality.
 
-1. [x] Update EventPage.module.css - Changed object-fit: cover to contain and removed fixed aspect ratio
-2. [x] Update HeroCarousel.module.css - Changed object-fit: cover to contain
-3. [x] Update Album.module.css - Changed object-fit: cover to contain
-4. [x] Update EventCard.module.css - Changed object-fit: cover to contain and removed fixed height
-5. [ ] Test changes to ensure images maintain aspect ratio properly
+# TODO for Home Page Share Button
 
-## Changes Made:
-
-- **EventPage.module.css**: Changed `object-fit: cover` to `contain`, removed `aspect-ratio: 4/3`, and made containers flexible
-- **HeroCarousel.module.css**: Changed `object-fit: cover` to `contain`
-- **Album.module.css**: Changed `object-fit: cover` to `contain`
-- **EventCard.module.css**: Changed `object-fit: cover` to `contain`, changed fixed `height: 250px` to flexible `height: auto` with `min-height`
-
-## Current Status:
-All CSS updates completed. Ready for testing.
+- [x] Create `components/ShareButton.tsx` with share functionality using Web Share API and fallback to clipboard.
+- [x] Create `components/ShareButton.module.css` with green gradient background and curved arrow icon, similar to AlbumButton.
+- [x] Add import and <ShareButton /> to `pages/index.tsx`.
+- [ ] Test the share button on the home page for functionality.

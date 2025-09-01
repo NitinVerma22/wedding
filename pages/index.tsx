@@ -4,6 +4,7 @@ import EventCard from "../components/EventCard";
 import Footer from "../components/Footer";
 import AudioPlayer from "../components/AudioPlayer";
 import Button from "../components/AlbumButton";
+import ShareButton from "../components/ShareButton";
 import FlowerRain from "../components/FlowerRain";
 import styles from "../styles/Home.module.css";
 
@@ -76,7 +77,8 @@ const Home: NextPage = () => {
       <Footer />
       <Button />
       <AudioPlayer pageName="Wedding" />
-  
+      <ShareButton />
+
     </div>
   );
 };

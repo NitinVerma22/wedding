@@ -1,0 +1,48 @@
+.shareButton {
+  position: fixed;
+  bottom: 170px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ce7ce2 0%, #e681d8 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  font-size:xx-large;
+  color: #05f311;
+}
+
+.shareButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.shareButton:active {
+  transform: scale(0.95);
+}
+
+.shareIcon {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
+
+@media (max-width: 768px) {
+  .shareButton {
+    bottom: 140px;
+    right: 15px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .shareIcon {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -4,6 +4,7 @@ interface AlbumContextType {
   isAlbumOpen: boolean;
   openAlbum: (event?: string) => void;
   closeAlbum: () => void;
+  coupleNames: string;
 }
 
 const AlbumContext = createContext<AlbumContextType | undefined>(undefined);
@@ -26,8 +27,10 @@ export const AlbumProvider: React.FC<AlbumProviderProps> = ({ children }) => {
   const openAlbum = (event?: string) => setIsAlbumOpen(true);
   const closeAlbum = () => setIsAlbumOpen(false);
 
+  const coupleNames = "Male & Female"; // Hardcoded for now, can be made dynamic later
+
   return (
-    <AlbumContext.Provider value={{ isAlbumOpen, openAlbum, closeAlbum }}>
+    <AlbumContext.Provider value={{ isAlbumOpen, openAlbum, closeAlbum, coupleNames }}>
       {children}
     </AlbumContext.Provider>
   );
